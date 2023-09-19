@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title data-element="home"></title>
+    <script src="js/templates.js" data-create="head"></script>
+</head>
+<body>
+    <div id="body" hidden>
+        <script src="js/templates.js" data-create="header, navbar, container, footer"></script>
+    </div>
+    <script>
+        initSlowLoading();
+        renderMarkdown(`./views/${language}/home.md`, null, (_) => {
+            stopSlowLoading();
+        });
+    </script>
+</body>
+</html>

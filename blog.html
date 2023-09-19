@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title data-element="blog"></title>
+    <script src="js/templates.js" data-create="head"></script>
+    <style>
+        table { margin: auto; }
+        th, tr, td { padding-left: 15px; }
+        td a { color: blue; }
+    </style>
+</head>
+<body>
+    <div id="body" hidden>
+        <script src="js/templates.js" data-create="header, navbar, container, footer"></script>
+    </div>
+    <script>
+        initSlowLoading();
+        renderMarkdown(`./views/${language}/blog.md`, null, (_) => {
+            stopSlowLoading();
+        });
+    </script>
+</body>
+</html>
