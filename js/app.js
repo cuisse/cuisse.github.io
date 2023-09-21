@@ -9,6 +9,7 @@ const languages = {
     "en": {
         "name": "English",
         "head": "Roman's Blog",
+        "icon": " •ᴗ• ",
         "home": "Home",
         "blog": "Blog",
         "info": "Contact",
@@ -21,6 +22,7 @@ const languages = {
     "es": {
         "name": "Español",
         "head": "Roman's Blog",
+        "icon": " •ᴗ• ",
         "home": "Inicio",
         "blog": "Blog",
         "info": "Contacto",
@@ -50,7 +52,7 @@ document.querySelector("html").setAttribute("lang", language);
 window.addEventListener("DOMContentLoaded", (_) => {
     for (let element of document.querySelectorAll("[data-element]")) {
         if (languages[language][element.getAttribute("data-element")]) {
-            element.innerText = languages[language][element.getAttribute("data-element")];
+            setElementText(element, languages[language][element.getAttribute("data-element")]);
         }
     }
     document.getElementById("navbar-item-home").setAttribute("href", paths.home);
@@ -104,7 +106,7 @@ function setElementText(element, text) {
 function initSlowLoading() {
     if (settings.slowLoading) {
         document.write(`
-            <div id="loading"><pre><b>${languages[language].load}</b></pre></div>
+            <div class="loading" id="loading"><pre><b>${languages[language].load}</b></pre></div>
         `);
     } else {
         document.getElementById("body").hidden = false;
