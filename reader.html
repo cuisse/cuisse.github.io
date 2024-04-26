@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title data-element="contact"></title>
+    <title>0</title>
     <script src="js/templates.js" data-create="head"></script>
 </head>
 <body>
@@ -10,7 +10,9 @@
     </div>
     <script>
         initSlowLoading();
-        renderMarkdown(`./views/${language}/contact.md`, null, (_) => {
+        renderMarkdown(`./${getParameter("section")}/${language}/${getParameter("title")}.md`, paths['404'], (showdown) => {
+            setElementText(document.querySelector("title"), showdown.getMetadata()["title"]);
+            hljs.highlightAll();
             stopSlowLoading();
         });
     </script>

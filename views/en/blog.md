@@ -2,4 +2,4 @@
 
 | Title                             | Date               |
 | :-------------------------------- | :----------------- |
-| [Welcome](post.html?post=Welcome) | September 19, 2023 |
+| [Welcome](reader.html?section=posts&title=Welcome) | September 19, 2023 |

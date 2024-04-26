@@ -10,7 +10,3 @@ The blog content is available in both **English** and **Spanish**. You can switc
 
 #### Code highlight 
 Code highlight in posts is done using [HighLightJS](./js/libs/highlight.min.js) library. You can always change theme in [templates](./js/templates.js) head section. For more themes you can click [here](https://github.com/highlightjs/highlight.js/tree/main/src/styles).
-
-#### Preview
-A preview of the blog's appearance.
-![Showcase](./resources/showcase.png)

@@ -4,6 +4,7 @@
             document.write(`
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width" height="device-height" initial-scale="1" , maximum-scale="1"/>
+                <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
                 <link rel="stylesheet" type="text/css" href="css/highlightjs_default.min.css">
                 <link rel="stylesheet" type="text/css" href="css/highlightjs-copy.min.css"/>
                 <link rel="stylesheet" type="text/css" href="css/index.css">
@@ -32,7 +33,8 @@
                     <hr class="dynamic-hr">
                     <a class="navbar-item" href="" id="navbar-item-home" data-element="home"></a><span class="element-separator"></span>
                     <a class="navbar-item" href="" id="navbar-item-blog" data-element="blog"></a><span class="element-separator"></span>
-                    <a class="navbar-item" href="" id="navbar-item-info" data-element="info"></a>
+                    <a class="navbar-item" href="" id="navbar-item-projects" data-element="projects"></a><span class="element-separator"></span>
+                    <a class="navbar-item" href="" id="navbar-item-contact" data-element="contact"></a>
                     <hr class="dynamic-hr">
                 </nav>
             `);
@@ -50,7 +52,7 @@
             document.write(`
                 <footer class="footer">
                     <fieldset>
-                        <legend style="text-align: center;" data-element="lang"></legend>
+                        <legend style="text-align: center; margin: 0 auto;" data-element="lang"></legend>
                         ${getAvailableLanguages()}
                     </fieldset>
                     <p data-element="foot"></p>
