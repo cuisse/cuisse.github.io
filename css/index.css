@@ -21,6 +21,10 @@ html, body {
 
 .navbar {
     text-align: center;
+    overflow: hidden;
+    width: 50%;
+    max-width: 50%;
+    margin: auto;
 }
 
 .current-index {
@@ -66,22 +70,25 @@ a:hover {
 }
 
 .dynamic-hr {
-    width: 50%;
+    width: 100%;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 700px) {
     .container {
        width: 90%;
        max-width: 90%;
     }
-    .dynamic-hr {
-        width: 90%;
-    }
  }
 
- @media screen and (max-width: 200px) {
+ @media screen and (max-width: 1080px) {
     .element-separator::after {
         content: "";
+    }
+    [id^=navbar-item-] {
+        display: block;
+        text-decoration: none;
+        padding-left: 15px;
+        padding-right: 15px;
     }
  }
 
