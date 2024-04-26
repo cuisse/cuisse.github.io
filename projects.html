@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <title>0</title>
+    <title data-element="projects"></title>
     <script src="js/templates.js" data-create="head"></script>
+    <style>
+        th, tr, td { padding-right: 15px; }
+        td a { color: blue; }
+    </style>
 </head>
 <body>
     <div id="body" hidden>
@@ -10,9 +14,7 @@
     </div>
     <script>
         initSlowLoading();
-        renderMarkdown(`./posts/${language}/${((new URLSearchParams(window.location.search)).get("post") ?? "null")}.md`, paths.blog, (showdown) => {
-            setElementText(document.querySelector("title"), showdown.getMetadata()["title"]);
-            hljs.highlightAll();
+        renderMarkdown(`./views/${language}/projects.md`, null, (_) => {
             stopSlowLoading();
         });
     </script>

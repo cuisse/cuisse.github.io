@@ -1,8 +1,15 @@
+const settings = {
+    slowLoading: true,
+    slowLoadingTimeout: 1000
+}
+
 const paths = {
-    home: "index.html"  ,
-    blog: "blog.html"   ,
-    info: "contact.html",
-    post: "post.html"
+    home: "index.html",
+    blog: "blog.html",
+    projects: "projects.html",
+    contact: "contact.html",
+    reader: "reader.html",
+    404: "404.html"
 };
 
 const languages = {
@@ -12,7 +19,8 @@ const languages = {
         "icon": " •ᴗ• ",
         "home": "Home 🏡",
         "blog": "Blog 📚",
-        "info": "Contact 🕵️",
+        "projects": "Projects 🛠️",
+        "contact": "Contact 🕵️",
         "post": "Post",
         "foot": "🌱",
         "lang": "Available Languages",
@@ -25,7 +33,8 @@ const languages = {
         "icon": " •ᴗ• ",
         "home": "Inicio 🏡",
         "blog": "Blog 📚",
-        "info": "Contacto 🕵️",
+        "projects": "Proyectos 🛠️",
+        "contact": "Contacto 🕵️",
         "post": "Post",
         "foot": "🌱",
         "lang": "Idiomas Disponibles",
@@ -35,17 +44,12 @@ const languages = {
 
 const language = (() => {
     if (localStorage.getItem("language")) {
-        return languages[localStorage.getItem("language")] ? localStorage.getItem("language") : "en";
+        return languages[lang = localStorage.getItem("language")] ? lang : "en";
     } else {
         localStorage.setItem("language", "en");
         return localStorage.getItem("language");
     }
 })();
-
-const settings = {
-    slowLoading       : true,
-    slowLoadingTimeout: 1000
-}
 
 document.querySelector("html").setAttribute("lang", language);
 
@@ -57,7 +61,8 @@ window.addEventListener("DOMContentLoaded", (_) => {
     }
     document.getElementById("navbar-item-home").setAttribute("href", paths.home);
     document.getElementById("navbar-item-blog").setAttribute("href", paths.blog);
-    document.getElementById("navbar-item-info").setAttribute("href", paths.info);
+    document.getElementById("navbar-item-projects").setAttribute("href", paths.projects);
+    document.getElementById("navbar-item-contact").setAttribute("href", paths.contact);
 });
 
 function switchLanguage(lang) {
@@ -71,28 +76,28 @@ function switchLanguage(lang) {
 
 function renderMarkdown(view, backup, whenDone) {
     fetch(view)
-    .then((response) => {
-        if (response.ok) {
-            return response.text();
-        } else {
-            throw new Error("", { cause: response });
-        }
-    })
-    .then((result) => {
-        if (result) {
-            const showdown = getShowdown();
-            document.getElementById("markdown").innerHTML = showdown.makeHtml(result);
-            if (whenDone) {
-                whenDone(showdown);
+        .then((response) => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                throw new Error("", { cause: response });
             }
-        }
-    })
-    .catch((reason) => {
-        console.error("Could not render '" + view + "', details: " + reason.message);
-        if (backup) {
-            redirect(backup)
-        }
-    });
+        })
+        .then((result) => {
+            if (result) {
+                const showdown = getShowdown();
+                document.getElementById("markdown").innerHTML = showdown.makeHtml(result);
+                if (whenDone) {
+                    whenDone(showdown);
+                }
+            }
+        })
+        .catch((reason) => {
+            console.error("Could not render '" + view + "', details: " + reason.message);
+            if (backup) {
+                redirect(backup)
+            }
+        });
 }
 
 function redirect(document) {
@@ -125,37 +130,42 @@ function stopSlowLoading() {
 function getShowdown() {
     showdown.extension('targetlink', () => {
         return [{
-            type   : 'lang',
-            regex  : /\[((?:\[[^\]]*]|[^\[\]])*)]\([ \t]*<?(.*?(?:\(.*?\).*?)?)>?[ \t]*((['"])(.*?)\4[ \t]*)?\)\{\:target=(["'])(.*)\6}/g,
+            type: 'lang',
+            regex: /\[((?:\[[^\]]*]|[^\[\]])*)]\([ \t]*<?(.*?(?:\(.*?\).*?)?)>?[ \t]*((['"])(.*?)\4[ \t]*)?\)\{\:target=(["'])(.*)\6}/g,
             replace: (wholematch, linkText, url, a, b, title, c, target) => {
                 var result = '<a href="' + url + '"';
-    
+
                 if (typeof title != 'undefined' && title !== '' && title !== null) {
                     title = title.replace(/"/g, '&quot;');
                     title = showdown.helper.escapeCharacters(title, '*_', false);
                     result += ' title="' + title + '"';
                 }
-    
+
                 if (typeof target != 'undefined' && target !== '' && target !== null) {
                     result += ' target="' + target + '"';
                 }
-    
+
                 result += '>' + linkText + '</a>';
                 return result;
             }
         }];
     });
-    
+
     return new showdown.Converter({
-        parseImgDimensions                 : true,
-        simplifiedAutoLink                 : true,
-        excludeTrailingPunctuationFromURLs : true,
-        tables                             : true,
-        ghMentions                         : true,
-        encodeEmails                       : true,
-        omitExtraWLInCodeBlocks            : true,
-        ellipsis                           : true,
-        metadata                           : true,
-        extensions                         : ["targetlink"]
+        parseImgDimensions: true,
+        simplifiedAutoLink: true,
+        excludeTrailingPunctuationFromURLs: true,
+        tables: true,
+        ghCompatibleHeaderId: true,
+        ghMentions: true,
+        encodeEmails: true,
+        omitExtraWLInCodeBlocks: true,
+        ellipsis: true,
+        metadata: true,
+        extensions: ["targetlink"]
     });
+}
+
+function getParameter(name) {
+    return ((new URLSearchParams(window.location.search)).get(name) ?? null)
 }

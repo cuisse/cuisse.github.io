@@ -1,6 +1,6 @@
 ---
 title: Welcome
-auhtor: Brayan Roman
+author: Brayan Roman
 date: 09-19-2023
 ---
 
