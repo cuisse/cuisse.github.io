@@ -43,11 +43,16 @@ const languages = {
 }
 
 const language = (() => {
-    if (localStorage.getItem("language")) {
-        return languages[lang = localStorage.getItem("language")] ? lang : "en";
+    let lang = getParameter("lang");
+    if (languages[lang]) {
+        return lang;
     } else {
-        localStorage.setItem("language", "en");
-        return localStorage.getItem("language");
+        if (lang = localStorage.getItem("language")) {
+            return languages[lang = localStorage.getItem("language")] ? lang : "en";
+        } else {
+            localStorage.setItem("language", "en");
+            return localStorage.getItem("language");
+        }
     }
 })();
 
