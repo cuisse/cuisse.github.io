@@ -42,15 +42,17 @@ const languages = {
     }
 }
 
+const defaultLanguage = "en";
+
 const language = (() => {
     let lang = getParameter("lang");
     if (languages[lang]) {
         return lang;
     } else {
         if (lang = localStorage.getItem("language")) {
-            return languages[lang = localStorage.getItem("language")] ? lang : "en";
+            return languages[lang] ? lang : defaultLanguage;
         } else {
-            localStorage.setItem("language", "en");
+            localStorage.setItem("language", defaultLanguage);
             return localStorage.getItem("language");
         }
     }
